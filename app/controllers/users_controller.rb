@@ -10,7 +10,15 @@ class UsersController < ApplicationController
         render json: { error: "Not logged in" }, status: :not_found
       end
     end
-  
+
+    
+    # Get all users
+    def index
+        users = User.includes(:appointments, :patients).all
+        render json: users.as_json(include: [:appointments, :patients])
+      end
+
+
     # Get Single User
     def show
       user = User.includes(:appointments, :patients).find_by(id: params[:id])
