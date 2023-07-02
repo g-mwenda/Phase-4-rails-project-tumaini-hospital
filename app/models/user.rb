@@ -3,6 +3,7 @@ class User < ApplicationRecord
     has_many :appointments
     has_secure_password
 
+    
     validates :name, presence: true
     validates :rank, presence: true
     validates :email, presence: true, uniqueness: true
