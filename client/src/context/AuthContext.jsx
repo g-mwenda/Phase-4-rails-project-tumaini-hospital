@@ -11,7 +11,7 @@ export default function AuthProvider({children})
     const [onChange, setonChange] = useState(true)
     // Login
     const login = (email, password) =>{
-        fetch("http://127.0.0.1:3000/login", {
+        fetch("/login", {
             method: "POST",
             headers: {"Content-Type":"application/json"},
             body: JSON.stringify({email, password})
@@ -29,7 +29,7 @@ export default function AuthProvider({children})
             }
             else if(response.success)
             { 
-                nav("/")
+                nav("/account/dashboard")
                 Swal.fire(
                     'Success',
                     response.success,
@@ -50,7 +50,7 @@ export default function AuthProvider({children})
 
     // Logout
     const logout = () =>{
-       fetch("http://127.0.0.1:3000/logout", {
+       fetch("/logout", {
         method: "DELETE",
                })
        .then((res)=>res.json())
@@ -67,7 +67,7 @@ export default function AuthProvider({children})
 
     useEffect(()=>{
         console.log("Error")
-        fetch("http://127.0.0.1:3000/current_user")
+        fetch("/current_user")
         .then((res)=>res.json())
         .then((response)=>{
             setCurrentUser(response)

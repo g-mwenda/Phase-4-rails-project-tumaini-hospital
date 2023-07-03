@@ -1,8 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react'
+import {Link}  from "react-router-dom"
+import { AuthContext } from '../../context/AuthContext'
 import './Navbar.css';
 
 function Navbar() {
+  const {current_user, logout} = useContext(AuthContext)
+  // console.log("User from Navbar", current_user)
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-body-tertiary shadow mb-0" id="navigation" style={{ marginBottom: '0' }}>
@@ -43,6 +47,15 @@ function Navbar() {
                   Book an appointment
                 </Link>
               </li>
+              {current_user && current_user?
+              <>
+             <li className="nav-item">
+                <Link to="account/dashboard" className="nav-link active">
+                  Dashboard
+                </Link>
+              </li>
+              </>:<></>
+          } 
             </ul>
           </div>
         </div>
