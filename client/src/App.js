@@ -5,6 +5,7 @@ import Contact from './components/Contact';
 import About from './components/About';
 import Layout from "./components/layout/Layout";
 import Login from './components/Login';
+import Dashboard from './components/Dashboard';
 import Book from './components/Book';
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="book" element={<Book />} />
           <Route path="account/login" element={<Login />} />
+          <Route path="account/dashboard" element={<Dashboard />} />
           <Route path="contactus" element={<Contact />} />
         </Route>
       </Routes>
