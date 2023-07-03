@@ -1,43 +1,45 @@
 # app/controllers/users_controller.rb
 class UsersController < ApplicationController
-  skip_before_action :authorize
-
-  def loggedin_user
-    user = User.find_by(id: session[:user_id])
-    if user
-      render json: user.as_json(include: [:appointments, patients: { :conditions => { archive: false } }])
-    else
-      render json: { error: "Not logged in" }, status: :not_found
+    skip_before_action :authorize
+  
+    def loggedin_user
+      user = User.find_by(id: session[:user_id])
+      if user
+        render json: user.as_json(include: [:appointments, :patients])
+      else
+        render json: { error: "Not logged in" }, status: :not_found
+      end
     end
-  end
 
-  # Get all users
-  def index
-    users = User.includes(:appointments, :patients).all
-    render json: users.as_json(include: [:appointments, patients: { :conditions => { archive: false } }])
-  end
+    
+    # Get all users
+    def index
+        users = User.includes(:appointments, :patients).all
+        render json: users.as_json(include: [:appointments, :patients])
+      end
 
-  # Get Single User
-  def show
-    user = User.includes(:appointments, :patients).find_by(id: params[:id])
-    if user
-      render json: user.as_json(include: [:appointments, patients: { :conditions => { archive: false } }])
-    else
-      render json: { error: "User not found" }, status: :not_found
+
+    # Get Single User
+    def show
+      user = User.includes(:appointments, :patients).find_by(id: params[:id])
+      if user
+        render json: user.as_json(include: [:appointments, :patients])
+      else
+        render json: { error: "User not found" }, status: :not_found
+      end
     end
-  end
-
-  # Add new user
-  def create
-    user = User.create(email: params[:email], rank: params[:rank], name: params[:name], password: params[:password])
-    if user.valid?
-      render json: { success: "User created successfully" }, status: :created
-    else
-      render json: { error: user.errors.full_messages }, status: :unprocessable_entity
+  
+    # Add new user
+    def create
+      user = User.create(email: params[:email], rank: params[:rank],name: params[:name], password: params[:password])
+      if user.valid?
+        render json: { success: "User created successfully" }, status: :created
+      else
+        render json: { error: user.errors.full_messages }, status: :unprocessable_entity
+      end
     end
-  end
 
-  # Change user's password
+      # Change user's password
   def changepassword
     user = User.find_by(id: params[:id])
     if user
@@ -58,4 +60,5 @@ class UsersController < ApplicationController
 
     render json: message
   end
-end
+  end
+  
