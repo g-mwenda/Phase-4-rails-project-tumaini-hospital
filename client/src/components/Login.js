@@ -3,7 +3,7 @@ import { AuthContext } from '../context/AuthContext'
 
 
 function Login() {
-  const {login} = useContext(AuthContext)
+  const {login, current_user} = useContext(AuthContext)
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -14,6 +14,21 @@ function Login() {
       console.log(email+ "  "+password)
      
       login(email, password)
+  }
+  if (current_user && Object.keys(current_user).length !== 0) {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '75vh',
+          fontSize: '64px',
+        }}
+      >
+        You are already logged in.
+      </div>
+    );
   }
   return (
     <div>

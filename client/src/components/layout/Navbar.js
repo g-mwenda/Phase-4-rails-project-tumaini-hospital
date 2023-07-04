@@ -47,15 +47,14 @@ function Navbar() {
                   Book an appointment
                 </Link>
               </li>
-              {current_user && current_user?
-              <>
-             <li className="nav-item">
-                <Link to="account/dashboard" className="nav-link active">
-                  Dashboard
-                </Link>
-              </li>
-              </>:<></>
-          } 
+                 {/* Dashboard link */}
+                 {current_user && Object.keys(current_user).length !== 0 ? (
+                <li className="nav-item">
+                  <Link to="/account/dashboard" className="nav-link active">
+                    Dashboard
+                  </Link>
+                </li>
+              ) : null}
             </ul>
           </div>
         </div>

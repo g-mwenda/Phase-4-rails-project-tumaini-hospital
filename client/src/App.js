@@ -8,12 +8,14 @@ import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import Book from './components/Book';
 import AuthProvider from "./context/AuthContext"
+import PatientProvider from "./context/PatientContext"
 function App() {
 
 
   return (
     <BrowserRouter>
     <AuthProvider>
+    <PatientProvider>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
@@ -24,7 +26,8 @@ function App() {
           <Route path="contactus" element={<Contact />} />
         </Route>
       </Routes>
-      </AuthProvider>
+    </PatientProvider>
+    </AuthProvider>
     </BrowserRouter>
   );
 }

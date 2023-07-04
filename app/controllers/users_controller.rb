@@ -5,9 +5,9 @@ class UsersController < ApplicationController
   def loggedin_user
     user = User.find_by(id: session[:user_id])
     if user
-      render json: user.as_json(include: [:appointments, patients: { :conditions => { archive: false } }])
+      render json: user.as_json(include: [:appointments, patients: { conditions: { archive: false } }])
     else
-      render json: { error: "Not logged in" }, status: :not_found
+      render json: [].as_json, status: :not_found
     end
   end
 
