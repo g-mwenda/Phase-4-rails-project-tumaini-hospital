@@ -9,6 +9,28 @@ export default function AuthProvider({children})
     const nav = useNavigate()
     const [current_user, setCurrentUser] = useState([])
     const [onChange, setonChange] = useState(true)
+
+    function addUser(userData) {
+        fetch('/users', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(userData),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.success) {
+              Swal.fire('Success', 'User added successfully!', 'success');
+              // Clear the form after successful submission
+            } else {
+              Swal.fire('Error', data.error.join(', '), 'error');
+            }
+          })
+          .catch((error) => {
+            Swal.fire('Error', 'Something went wrong', 'error');
+            console.error(error);
+          });
+      }
+      
     // Login
     const login = (email, password) =>{
         fetch("/login", {
@@ -84,6 +106,29 @@ export default function AuthProvider({children})
             }
        })
     }
+
+    const deleteAppointment = (id) => {
+        fetch(`/appointments/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((response) => {
+            if (response.success) {
+              Swal.fire("Success", response.success, "success");
+              // Update the state to remove the deleted appointment
+              setCurrentUser((prevUser) => {
+                const updatedAppointments = prevUser.appointments.filter(
+                  (appointment) => appointment.id !== id
+                );
+                return { ...prevUser, appointments: updatedAppointments };
+              });
+            } else {
+              Swal.fire("Error", "Something went wrong", "error");
+            }
+          });
+      };
+      
+
     // Register
     const register = () =>{
      return "Register function"
@@ -103,7 +148,9 @@ export default function AuthProvider({children})
         login, 
         register,
         logout,
-        current_user
+        current_user,
+        deleteAppointment,
+        addUser,
     }
 
   return (
