@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
     resources :users, only: [:index, :show,:create,:destroy]
     resources :appointments, only: [:index, :show,:create,:update,:destroy]
-    resources :patients, only: [:index, :show,:create,:destroy]
+    resources :patients, only: [:index, :show,:create,:update,:destroy]
 
 
   get "/userpatients", to:"patients#userpatients"

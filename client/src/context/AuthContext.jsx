@@ -130,10 +130,66 @@ export default function AuthProvider({children})
       };
       
 
-    // Register
-    const register = () =>{
-     return "Register function"
-    }
+      function updateAppointment(id, appointmentData) {
+        fetch(`/appointments/${id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(appointmentData),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.success) {
+              Swal.fire("Success", data.success, "success");
+              // Update the current_user state with the updated appointment
+              setCurrentUser((prevUser) => {
+                const updatedAppointments = prevUser.appointments.map((appointment) => {
+                  if (appointment.id === id) {
+                    return { ...appointment, ...appointmentData };
+                  }
+                  return appointment;
+                });
+                return { ...prevUser, appointments: updatedAppointments };
+              });
+            } else {
+              Swal.fire("Error", data.error.join(", "), "error");
+            }
+          })
+          .catch((error) => {
+            Swal.fire("Error", "Something went wrong", "error");
+            console.error(error);
+          });
+      }
+
+
+      function updatePatient(id, patientData) {
+        fetch(`/patients/${id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(patientData),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.success) {
+              Swal.fire("Success", data.success, "success");
+              // Update the current_user state with the updated patient
+              setCurrentUser((prevUser) => {
+                const updatedPatients = prevUser.patients.map((patient) => {
+                  if (patient.id === id) {
+                    return { ...patient, ...patientData };
+                  }
+                  return patient;
+                });
+                return { ...prevUser, patients: updatedPatients };
+              });
+            } else {
+              Swal.fire("Error", data.error.join(", "), "error");
+            }
+          })
+          .catch((error) => {
+            Swal.fire("Error", "Something went wrong", "error");
+            console.error(error);
+          });
+      }
 
     useEffect(()=>{
         console.log("Error")
@@ -158,12 +214,13 @@ export default function AuthProvider({children})
 
     const contextData ={
         login, 
-        register,
         logout,
         current_user,
         deleteAppointment,
         addUser,
-        users
+        users,
+        updateAppointment,
+        updatePatient,
     }
 
   return (

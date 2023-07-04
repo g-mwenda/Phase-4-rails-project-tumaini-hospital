@@ -15,6 +15,15 @@ function Book() {
   const handleAppointment = (e) => {
     e.preventDefault();
 
+    const selectedTime = new Date(`2000-01-01T${time}`);
+    const startTime = new Date(`2000-01-01T09:00`);
+    const endTime = new Date(`2000-01-01T17:00`);
+
+    if (selectedTime < startTime || selectedTime > endTime) {
+      alert('Time must be between 9 AM and 5 PM');
+      return;
+    }
+
     const appointmentData = {
       name,
       email,
