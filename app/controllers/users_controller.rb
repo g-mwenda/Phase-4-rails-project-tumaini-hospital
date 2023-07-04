@@ -5,12 +5,13 @@ class UsersController < ApplicationController
   def loggedin_user
     user = User.find_by(id: session[:user_id])
     if user
-      render json: user.as_json(include: [:appointments, patients: { conditions: { archive: false } }])
+      patients = user.patients.where(archive: false)
+      render json: user.as_json(include: [:appointments, :patients]), patients: patients
     else
       render json: [].as_json, status: :not_found
     end
   end
-
+  
   # Get Single User
   def show
     user = User.includes(:appointments, :patients).find_by(id: params[:id])

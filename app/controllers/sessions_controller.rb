@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
 
             render json: {success: "Login success"}
         else
-            render json: {error: "Wrong username/password"}
+            render json: {error: "Wrong login credentials"}
 
         end
     end 

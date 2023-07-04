@@ -24,9 +24,10 @@ function Login() {
           alignItems: 'center',
           height: '75vh',
           fontSize: '64px',
+          textAlign: "center"
         }}
       >
-        You are already logged in.
+        You are already logged in.Have a nice day<br/>😊
       </div>
     );
   }

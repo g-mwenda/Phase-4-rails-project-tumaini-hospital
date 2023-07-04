@@ -37,9 +37,10 @@ function Dashboard() {
           alignItems: 'center',
           height: '75vh',
           fontSize: '64px',
+          textAlign: "center"
         }}
       >
-        You are currently not logged in.
+        You are currently not logged in.<br/>💔
       </div>
     );
   }
@@ -77,10 +78,37 @@ function Dashboard() {
       </div>
 
       {activeSubpage === 'subpage1' && (
-        <div id="subpage1" className="subpage" style={{ marginTop: '20px' }}>
-          <h3 className="text-center text-success">My patients</h3>
+  <div id="subpage1" className="subpage" style={{ marginTop: '20px' }}>
+    <h3 className="text-center text-success">My patients</h3>
+    <div className="container" style={{ marginBottom: '30px' }}>
+      {current_user.patients.filter(patient => !patient.archive).map((patient) => (
+        <div className="row shadow" style={{ padding: '30px', marginBottom: '20px' }} key={patient.id}>
+          <div className="col-md-6">
+            <img
+              className="bookimage img-fluid"
+              src="/logo.png"
+              alt="Application"
+              style={{ height: '300px' }}
+            />
+          </div>
+          <div className="col-md-6">
+            <h4>Name: {patient.name}</h4>
+            <p>Email: {patient.email}</p>
+            <p>Phone Number: {patient.phone}</p>
+            <p>Condition: {patient.condition}</p>
+            <p>Notes: {patient.notes}</p>
+            <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+              <>
+                <button className="btn btn-danger" onClick={() => handleDelete(patient.id)}>Delete</button>
+              </>
+            </div>
+          </div>
         </div>
-      )}
+      ))}
+    </div>
+  </div>
+)}
+
 
       {activeSubpage === 'subpage2' && (
         <div id="subpage2" className="subpage" style={{ marginTop: '20px' }}>
@@ -116,8 +144,34 @@ function Dashboard() {
 
       {activeSubpage === 'subpage3' && (
         <div id="subpage3" className="subpage" style={{ marginTop: '20px' }}>
-          <h3 className="text-center text-success">My appointments</h3>
+        <h3 className="text-center text-success">My appointments</h3>
+        <div className="container" style={{ marginBottom: '30px' }}>
+          {current_user.appointments.map((appointment) => (
+            <div className="row shadow" style={{ padding: '30px', marginBottom: '20px' }} key={appointment.id}>
+              <div className="col-md-6">
+                <img
+                  className="bookimage img-fluid"
+                  src="/logo.png"
+                  alt="Application"
+                  style={{ height: '300px' }}
+                />
+              </div>
+              <div className="col-md-6">
+                <h4>Name: {appointment.name}</h4>
+                <p>Email: {appointment.email}</p>
+                <p>Phone Number: {appointment.phone}</p>
+                <p>Condition: {appointment.date}</p>
+                <p>Notes: {appointment.time}</p>
+                <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                  <>
+                    <button className="btn btn-danger">Delete</button>
+                  </>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
+      </div>
       )}
 
       {activeSubpage === 'subpage4' && (
