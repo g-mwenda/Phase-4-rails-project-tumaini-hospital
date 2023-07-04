@@ -9,6 +9,7 @@ import Dashboard from './components/Dashboard';
 import Book from './components/Book';
 import AuthProvider from "./context/AuthContext"
 import PatientProvider from "./context/PatientContext"
+import AppointmentProvider from "./context/AppointmentContext"
 function App() {
 
 
@@ -16,6 +17,7 @@ function App() {
     <BrowserRouter>
     <AuthProvider>
     <PatientProvider>
+    <AppointmentProvider>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
@@ -26,6 +28,7 @@ function App() {
           <Route path="contactus" element={<Contact />} />
         </Route>
       </Routes>
+      </AppointmentProvider>
     </PatientProvider>
     </AuthProvider>
     </BrowserRouter>

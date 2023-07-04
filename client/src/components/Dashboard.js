@@ -127,6 +127,10 @@ function Dashboard() {
           <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage6')}>
             Add user
           </button>
+
+          <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage7')}>
+            Add patient
+          </button>
         </div>
       </div>
 

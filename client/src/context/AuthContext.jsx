@@ -9,6 +9,7 @@ export default function AuthProvider({children})
     const nav = useNavigate()
     const [current_user, setCurrentUser] = useState([])
     const [onChange, setonChange] = useState(true)
+    const [users, setUsers] = useState([]);
 
     function addUser(userData) {
         fetch('/users', {
@@ -144,6 +145,17 @@ export default function AuthProvider({children})
         })
     }, [onChange])
 
+
+
+    useEffect(() => {
+        fetch("/users")
+          .then((res) => res.json())
+          .then((response) => {
+            setUsers(response);
+            console.log("Patients", response);
+          });
+      }, [onChange]);
+
     const contextData ={
         login, 
         register,
@@ -151,6 +163,7 @@ export default function AuthProvider({children})
         current_user,
         deleteAppointment,
         addUser,
+        users
     }
 
   return (
