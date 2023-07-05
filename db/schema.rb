@@ -11,13 +11,16 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_07_02_195656) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "appointments", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.integer "phone"
     t.string "date"
     t.string "time"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_appointments_on_user_id"
@@ -30,7 +33,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_02_195656) do
     t.string "condition"
     t.text "notes"
     t.boolean "archive", default: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_patients_on_user_id"

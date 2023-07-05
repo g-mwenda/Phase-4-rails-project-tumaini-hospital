@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   get "/userpatients", to:"patients#userpatients"
   patch "/patients/archive/:id", to:"patients#archive"
+
+  get "*parts", to:"react#index"
   
 
 end
