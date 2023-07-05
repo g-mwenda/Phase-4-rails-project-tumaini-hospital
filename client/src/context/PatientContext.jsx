@@ -27,34 +27,29 @@ export default function PatientProvider({ children }) {
   };
 
   // Archive Patient
-  const archivePatient = (patientId) => {
-    fetch(`/patients/archive/${patientId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
+  
+
+  function addPatient(patientData) {
+    fetch("/patients", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(patientData),
     })
-      .then((response) => response.json())
+      .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          Swal.fire("Success", data.success, "success").then(() => {
-            // Update the state to remove the archived patient
-            setPatients((prevPatients) =>
-              prevPatients.filter((patient) => patient.id !== patientId)
-            );
-            setOnChange(!onChange);
-          });
+          Swal.fire("Success", data.success, "success");
+          // Clear the form after successful submission
         } else {
-          Swal.fire("Error", "Something went wrong", "error");
+          Swal.fire("Error", data.error.join(", "), "error");
         }
       })
       .catch((error) => {
-        console.error(
-          "Error occurred while updating patient archive status",
-          error
-        );
+        Swal.fire("Error", "Something went wrong", "error");
+        console.error(error);
       });
-  };
+  }
+  
 
   // Fetch patients
   useEffect(() => {
@@ -69,7 +64,7 @@ export default function PatientProvider({ children }) {
   const contextData = {
     patients,
     deletePatient,
-    archivePatient,
+    addPatient
   };
 
   return (

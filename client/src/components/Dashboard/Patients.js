@@ -4,8 +4,8 @@ import Swal from 'sweetalert2';
 import { PatientContext } from '../../context/PatientContext';
 
 function Patients() {
-  const { current_user, updatePatient } = useContext(AuthContext);
-  const { patients, deletePatient, archivePatient } = useContext(PatientContext);
+  const { current_user, updatePatient, archivePatient  } = useContext(AuthContext);
+  const { patients, deletePatient} = useContext(PatientContext);
   const [condition, setCondition] = useState('');
   const [notes, setNotes] = useState('');
 

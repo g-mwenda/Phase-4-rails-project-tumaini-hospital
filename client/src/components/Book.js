@@ -134,9 +134,11 @@ function Book() {
                   >
                     <option value="">Choose a doctor</option>
                     {users.map((user) => (
-                      <option key={user.id} value={user.id}>
-                        {user.name}
-                      </option>
+                      user.rank !== "admin" && (
+                        <option key={user.id} value={user.id}>
+                          {user.name}
+                        </option>
+                      )
                     ))}
                   </select>
                 </div>

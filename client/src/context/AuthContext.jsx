@@ -201,7 +201,61 @@ export default function AuthProvider({children})
         })
     }, [onChange])
 
-
+    const archivePatient = (patientId) => {
+      fetch(`/patients/archive/${patientId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            Swal.fire("Success", data.success, "success").then(() => {
+              // Update the state to remove the archived patient
+              setCurrentUser((prevUser) => {
+                const updatedPatients = prevUser.patients.filter(
+                  (patient) => patient.id !== patientId
+                );
+                return { ...prevUser, patients: updatedPatients };
+              });
+            });
+          } else {
+            Swal.fire("Error", "Something went wrong", "error");
+          }
+        })
+        .catch((error) => {
+          console.error(
+            "Error occurred while updating patient archive status",
+            error
+          );
+        });
+    };
+    
+    
+  const changePassword = (userId, currentPassword, newPassword) => {
+    // Send a request to the server to change the password
+    fetch(`/changepassword/${userId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        current_password: currentPassword,
+        new_password: newPassword,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          Swal.fire('Success', data.success, 'success');
+        } else {
+          Swal.fire('Error', data.error, 'error');
+        }
+      })
+      .catch((error) => {
+        Swal.fire('Error', 'Something went wrong', 'error');
+        console.error(error);
+      });
+  };
 
     useEffect(() => {
         fetch("/users")
@@ -221,6 +275,8 @@ export default function AuthProvider({children})
         users,
         updateAppointment,
         updatePatient,
+        archivePatient,
+        changePassword
     }
 
   return (

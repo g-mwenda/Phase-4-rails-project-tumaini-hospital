@@ -5,6 +5,8 @@ import Swal from 'sweetalert2';
 import Adduser from './Dashboard/Adduser';
 import Appointments from './Dashboard/Appointments';
 import Patients from './Dashboard/Patients';
+import Addpatient from './Dashboard/Addpatient';
+import Password from './Dashboard/Password';
 function Dashboard() {
   const [activeSubpage, setActiveSubpage] = useState('subpage1');
 
@@ -53,38 +55,46 @@ function Dashboard() {
   return (
     <div>
       <div className="d-flex justify-content-center" style={{ marginTop: '40px' }} id="btn">
-        <div className="d-flex flex-column flex-md-row">
-          <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage1')}>
-            My patients
-          </button>
+  <div className="d-flex flex-column flex-md-row">
+  {current_user.rank === 'admin' ? (
+  <>
+    <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage2')}>
+      All patients
+    </button>
 
-          <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage2')}>
-            All patients
-          </button>
+    <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage6')}>
+      Add user
+    </button>
+  </>
+) : (
+  <>
+    <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage1')}>
+      My patients
+    </button>
 
-          <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage3')}>
-            My appointments
-          </button>
+    <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage3')}>
+      My appointments
+    </button>
 
-          <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage4')}>
-            My account
-          </button>
+    <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage4')}>
+      My account
+    </button>
 
-          <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage5')}>
-            Account settings
-          </button>
+    <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage5')}>
+      Account settings
+    </button>
+
+    <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage7')}>
+      Add patient
+    </button>
+  </>
+)}
 
 
 
-          <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage6')}>
-            Add user
-          </button>
+  </div>
+</div>
 
-          <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage7')}>
-            Add patient
-          </button>
-        </div>
-      </div>
 
       {activeSubpage === 'subpage1' && (
         <Patients/>
@@ -167,13 +177,15 @@ function Dashboard() {
       )}
 
       {activeSubpage === 'subpage5' && (
-        <div id="subpage5" className="subpage" style={{ marginTop: '20px' }}>
-          <h3 className="text-center text-success">Account settings</h3>
-        </div>
+        <Password/>
       )}
 
       {activeSubpage === 'subpage6' && (
         <Adduser />
+      )}
+
+       {activeSubpage === 'subpage7' && (
+        <Addpatient/>
       )}
     </div>
   );
