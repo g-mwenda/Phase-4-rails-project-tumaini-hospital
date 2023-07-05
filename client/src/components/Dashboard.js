@@ -8,7 +8,7 @@ import Patients from './Dashboard/Patients';
 import Addpatient from './Dashboard/Addpatient';
 import Password from './Dashboard/Password';
 function Dashboard() {
-  const [activeSubpage, setActiveSubpage] = useState('subpage1');
+  const [activeSubpage, setActiveSubpage] = useState('subpage4');
 
   const showSubpage = (subpageId) => {
     setActiveSubpage(subpageId);
@@ -55,49 +55,49 @@ function Dashboard() {
   return (
     <div>
       <div className="d-flex justify-content-center" style={{ marginTop: '40px' }} id="btn">
-  <div className="d-flex flex-column flex-md-row">
-  {current_user.rank === 'admin' ? (
-  <>
-    <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage2')}>
-      All patients
-    </button>
+        <div className="d-flex flex-column flex-md-row">
+          {current_user.rank === 'admin' ? (
+            <>
+              <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage2')}>
+                All patients
+              </button>
 
-    <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage6')}>
-      Add user
-    </button>
-  </>
-) : (
-  <>
-    <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage1')}>
-      My patients
-    </button>
+              <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage6')}>
+                Add user
+              </button>
+            </>
+          ) : (
+            <>
+              <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage1')}>
+                My patients
+              </button>
 
-    <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage3')}>
-      My appointments
-    </button>
+              <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage3')}>
+                My appointments
+              </button>
 
-    <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage4')}>
-      My account
-    </button>
+              <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage7')}>
+                Add patient
+              </button>
+            </>
+          )}
 
-    <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage5')}>
-      Account settings
-    </button>
+          <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage4')}>
+            My account
+          </button>
 
-    <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage7')}>
-      Add patient
-    </button>
-  </>
-)}
+          <button className="btn mb-2 mb-md-0 me-md-3" onClick={() => showSubpage('subpage5')}>
+            Account settings
+          </button>
 
 
 
-  </div>
-</div>
+        </div>
+      </div>
 
 
       {activeSubpage === 'subpage1' && (
-        <Patients/>
+        <Patients />
       )}
 
       {activeSubpage === 'subpage2' && (
@@ -167,7 +167,7 @@ function Dashboard() {
                 <p>Email: {current_user.email}</p>
                 <p>Name: {current_user.name}</p>
                 <p>Rank: {current_user.rank}</p>
-                <button onClick={() => logout()} className="btn btn-primary mb-2">
+                <button onClick={() => logout()} className="btn btn-success mb-2">
                   Logout
                 </button>
               </div>
@@ -177,15 +177,15 @@ function Dashboard() {
       )}
 
       {activeSubpage === 'subpage5' && (
-        <Password/>
+        <Password />
       )}
 
       {activeSubpage === 'subpage6' && (
         <Adduser />
       )}
 
-       {activeSubpage === 'subpage7' && (
-        <Addpatient/>
+      {activeSubpage === 'subpage7' && (
+        <Addpatient />
       )}
     </div>
   );
