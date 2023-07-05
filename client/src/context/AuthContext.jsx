@@ -20,6 +20,7 @@ export default function AuthProvider({children})
           .then((res) => res.json())
           .then((data) => {
             if (data.success) {
+              nav("/account/dashboard")
               Swal.fire('Success', 'User added successfully!', 'success');
               // Clear the form after successful submission
             } else {
@@ -139,6 +140,7 @@ export default function AuthProvider({children})
           .then((res) => res.json())
           .then((data) => {
             if (data.success) {
+              nav("/account/dashboard")
               Swal.fire("Success", data.success, "success");
               // Update the current_user state with the updated appointment
               setCurrentUser((prevUser) => {
@@ -170,6 +172,7 @@ export default function AuthProvider({children})
           .then((res) => res.json())
           .then((data) => {
             if (data.success) {
+              nav("/account/dashboard")
               Swal.fire("Success", data.success, "success");
               // Update the current_user state with the updated patient
               setCurrentUser((prevUser) => {
@@ -246,6 +249,7 @@ export default function AuthProvider({children})
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
+          nav("/account/dashboard")
           Swal.fire('Success', data.success, 'success');
         } else {
           Swal.fire('Error', data.error, 'error');

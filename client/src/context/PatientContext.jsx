@@ -1,11 +1,12 @@
 import { createContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
-
+import { useNavigate } from "react-router-dom";
 export const PatientContext = createContext();
 
 export default function PatientProvider({ children }) {
   const [patients, setPatients] = useState([]);
-  const [onChange, setOnChange] = useState(true);
+ 
+  const nav = useNavigate()
 
   // Delete Patient
   const deletePatient = (id) => {
@@ -38,6 +39,7 @@ export default function PatientProvider({ children }) {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
+          nav("/account/dashboard")
           Swal.fire("Success", data.success, "success");
           // Clear the form after successful submission
         } else {
@@ -59,7 +61,7 @@ export default function PatientProvider({ children }) {
         setPatients(response);
         console.log("Patients", response);
       });
-  }, [onChange]);
+  }, []);
 
   const contextData = {
     patients,

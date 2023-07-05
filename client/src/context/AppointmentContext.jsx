@@ -1,11 +1,12 @@
 import React, { createContext } from "react";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export const AppointmentContext = createContext();
 
 export default function AppointmentProvider({ children }) {
 
-
+  const nav = useNavigate()
   function addAppointment(appointmentData) {
     fetch("/appointments", {
       method: "POST",
@@ -15,6 +16,7 @@ export default function AppointmentProvider({ children }) {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
+          nav("/")
           Swal.fire("Success", data.success, "success");
           // Clear the form after successful submission
         } else {
