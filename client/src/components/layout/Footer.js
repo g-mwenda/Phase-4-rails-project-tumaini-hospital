@@ -38,7 +38,7 @@ function Footer() {
 </div>
 </section>
     <div className="text-center text-white p-3" style={{ backgroundColor: 'green' }}>
-      ©Cheche Hospital 2023
+      ©Tumaini Hospital 2023
     </div>
   </footer></div>
   )

@@ -5,7 +5,7 @@ function About() {
     <div>
       <section style={{ marginTop: '75px', marginBottom: '100px' }}>
         <div className="container">
-          <h2 className='text-center text-success'>Welcome the Cheche Hospital</h2>
+          <h2 className='text-center text-success'>Welcome the Tumaini Hospital</h2>
           <p>
           Tumaini Hospital is a leading healthcare institution dedicated to providing exceptional medical services and promoting the well-being of our patients. With a rich history spanning over 50 years, we have been at the forefront of delivering quality healthcare to our community. From our humble beginnings as a small clinic, we have grown into a state-of-the-art medical facility, equipped with advanced technology and a team of highly skilled healthcare professionals. We take pride in our commitment to innovation, compassion, and excellence, striving to make a positive impact on the lives of those we serve.
           </p>
