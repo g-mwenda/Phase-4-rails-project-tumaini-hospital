@@ -114,7 +114,7 @@ The Tumaini Hospital website is deployed and can be accessed at https://phase4ho
 
 ## License
 
-The Tumaini Hospital website is released under the [MIT License](LICENSE). You are free to use, modify, and distribute this software. See the [LICENSE](LICENSE) file for more details.
+The Tumaini Hospital website is released under the [MIT License](https://github.com/cheche-henry/phase-4-hospital-app/blob/main/LICENSE). You are free to use, modify, and distribute this software. See the [LICENSE](https://github.com/cheche-henry/phase-4-hospital-app/blob/main/LICENSE) file for more details.
 
 ## Authors
 
