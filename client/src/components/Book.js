@@ -56,7 +56,7 @@ function Book() {
                   <label className="form-label">Name</label>
                   <input
                     type="text"
-                    pattern="[A-Za-z]+"
+                    pattern="[A-Za-z ]+"  // Updated pattern to allow space bars
                     className="form-control"
                     placeholder="Enter name"
                     name="name"
@@ -64,6 +64,7 @@ function Book() {
                     onChange={(e) => setName(e.target.value)}
                     required
                   />
+
                 </div>
 
                 <div className="mb-4">
