@@ -123,3 +123,4 @@ The Tumaini Hospital website was developed by the following authors:
 - Henry Cheche - henry.cheche@student.moringaschool.com
 - Moesha Gitae - moesha.githae@student.moringaschool.com
 - Gabriel Mwenda - gabriel.mwenda@student.moringaschool.com
+- Nahson Mutethia - nashtesh22@gmail.com
